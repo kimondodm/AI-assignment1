@@ -1,1 +1,29 @@
+import matplotlib.pyplot as plt
+import networkx as nx
 
+bbitb_graph = {
+    'Sports Complex': ['Siwaka'],
+    'Siwaka': ['Ph.1A', 'Ph.1B'],
+    'Ph.1A': ['Mada', 'Ph.1B'],
+    'Ph.1B': ['Phase 2', 'STC'],
+    'Phase 2': ['Phase 3', 'J1','STC'],
+    'Phase 3': ['Parking lot'],
+    'J1':['Mada'],
+    'Parking lot':['Mada']
+}
+
+
+def show(graph):
+    nx_graph = nx.Graph()
+
+    for node in graph:
+        for neighbour in graph[node]:
+            nx_graph.add_edge(node, neighbour, color="black")
+
+    x = nx.spring_layout(nx_graph)
+    colors = [nx_graph[u][v]['color'] for u, v in nx_graph.edges()]
+    nx.draw(nx_graph, x, node_color="#ADD8E6", edge_color=colors, width=2, with_labels=True)
+    plt.show()
+
+
+show(bbitb_graph)
